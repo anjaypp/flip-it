@@ -1,9 +1,10 @@
 const mongoose = require("mongoose");
+const { google } = require("../config/config");
 
 const userSchema = new mongoose.Schema({
-  username:{
-    type:String,
-    required:true,
+  username: {
+    type: String,
+    required: true,
     unique: true
   },
   email: {
@@ -11,14 +12,17 @@ const userSchema = new mongoose.Schema({
     required: true,
     unique: true
   },
-  password:{
-    type:String,
-    required:true,
-    unique: true
+  password: {
+    type: String,
+    required: true
   },
   profilePicture: {
     publicId: String,
     url: String
+  },
+  googleId: {
+    type: String,
+    unique: true
   },
 
   // User Role and Status
@@ -30,6 +34,14 @@ const userSchema = new mongoose.Schema({
   isActive: {
     type: Boolean,
     default: true
+  },
+  resetPasswordToken: {
+    type: String,
+    default: null
+  },
+  resetPasswordExpiry: {
+    type: Date,
+    default: null
   },
 
   // Library and Purchased Books
@@ -60,6 +72,7 @@ const userSchema = new mongoose.Schema({
       }
     }
   ],
+
   // Wishlist
   wishlist: [
     {

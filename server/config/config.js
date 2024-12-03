@@ -10,7 +10,19 @@ const config = {
   
   jwt: {
     secret: process.env.JWT_SECRET,
-    expiresIn: process.env.JWT_EXPIRES_IN || "1d"
+    expiresIn: process.env.JWT_EXPIRES_IN || "1d",
+    refreshSecret: process.env.REFRESH_SECRET,
+    refreshExpiresIn: process.env.REFRESH_EXPIRES_IN || '7d',   
+  },
+  email:{
+    user: process.env.USER_EMAIL,
+    pass: process.env.EMAIL_PASS,
+  },
+  google:{
+    clientID: process.env.GOOGLE_CLIENT_ID,
+    clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+    sessionSecret: process.env.GOOGLE_SESSION_SECRET,
+    callbackURL: process.env.GOOGLE_CALLBACK_URL
   },
   cloudinary: {
     cloudName: process.env.CLOUDINARY_CLOUD_NAME,

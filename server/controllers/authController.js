@@ -8,9 +8,6 @@ const userModel = require('../models/userModel');
 const config = require('../config/config');
 const logger = require('../config/logger');
 
-
-
-
 // Registration logic
 exports.register = async(req, res, next) => {
     const { username, email, password } = req.body;
@@ -43,7 +40,7 @@ exports.register = async(req, res, next) => {
             username: newUser.username,
         });
         
-        res.status(201).json({message: 'User created successfully!', userId: newUser._id});
+        res.status(201).json({message: 'User created successfully!', userId: newUser._id, token: ''});
     }
     catch(err){
         logger.error('Registration error', {
@@ -119,25 +116,24 @@ exports.forgetPassword = async(req, res, next) => {
         if(!user){
             return res.status(400).json({message: 'Email not found'});
         }
-
+        
         //Generate a 6-digit numerical token
-       const resetToken = crypto.randomBytes(32).toString('hex');
-       const hashedToken = crypto.createHash('sha256').update(resetToken).digest('hex');
-
+       const resetOTP = Math.floor(100000 + Math.random() * 900000).toString();
+       const hashedOTP = crypto.createHash('sha256').update(resetOTP).digest('hex');
+       
         //Save the token and expiry time in database
-        user.resetPasswordToken = hashedToken;
+        user.resetPasswordToken = hashedOTP;
         user.resetPasswordExpiry = Date.now() + 10 * 60 * 1000; // 10 minutes
         await user.save();
 
-        // Create reset URL
-        const resetURL = `${config.frontendUrl}/reset-password?token=${resetToken}`;
+        console.log('User after saving OTP:', user);
 
         //Send the token to user's email
         const transporter = nodemailer.createTransport({
-            service: "gmail",
+            service: 'Gmail',
             auth: {
                 user: config.email.user,
-                pass: config.email.password,
+                pass: config.email.pass,
             },
         });
         //Email configuration
@@ -147,12 +143,13 @@ exports.forgetPassword = async(req, res, next) => {
             subject: 'Password Reset Request',
             html: `
                 <h1>Password Reset</h1>
-                <p>You requested a password reset. Click the link below to reset your password:</p>
-                <a href="${resetURL}">Reset Password</a>
-                <p>This link will expire in 10 minutes.</p>
+                <p>Your One-Time Password (OTP) is: </p>
+                <h2>${resetOTP}</h2>
+                <p>This OTP will expire in 10 minutes.</p>
                 <p>If you did not request a password reset, please ignore this email.</p>
             `
         };
+        console.log('Generated OTP:', resetOTP);
         //Send the email
         transporter.sendMail(mailOptions);
 
@@ -177,24 +174,22 @@ exports.forgetPassword = async(req, res, next) => {
 //Reset Password Logic
 exports.resetPassword = async (req, res, next) => {
     try {
-        const { email, token, newPassword } = req.body;
+        const { email, resetOTP, newPassword } = req.body;
 
         // Hash the incoming token for comparison
-        const hashedToken = crypto
-            .createHash('sha256')
-            .update(token)
-            .digest('hex');
+        const hashedOTP = crypto.createHash('sha256').update(resetOTP).digest('hex'); // Hashing received OTP
+
 
         // Find user with valid reset token
         const user = await userModel.findOne({
             email,
-            resetPasswordToken: hashedToken,
+            resetPasswordToken: hashedOTP,
             resetPasswordExpiry: { $gt: Date.now() }
         });
 
         if (!user) {
             return res.status(400).json({ 
-                message: 'Invalid or expired reset token' 
+                message: 'Invalid or expired OTP' 
             });
         }
 

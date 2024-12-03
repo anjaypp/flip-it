@@ -1,7 +1,10 @@
 const express = require('express');
-
+const session = require('express-session');
+const passport = require('passport');
+const morgan = require('morgan');
 const cors = require('cors');
 const config = require('./config/config');
+require("./config/auth");
 const connectDB = require('./config/db');
 
 // Create Express app
@@ -12,11 +15,28 @@ connectDB();
 
 // Middleware
 app.use(cors());
+app.use(morgan('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
 
+//Express Session Middleware
+app.use(session({
+    secret: config.google.sessionSecret,
+    resave: false,
+    saveUninitialized: false,
+}));
+
+
+// Initialize passport middleware
+app.use(passport.initialize());
+app.use(passport.session());
+
+
 //Routes
+const authRoutes = require('./routes/authRoutes');  
+app.use('/api/auth', authRoutes);
+
 
 
 // Start the server
