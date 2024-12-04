@@ -3,8 +3,8 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const nodemailer = require('nodemailer');
 
-
 const userModel = require('../models/userModel');
+const bookModel = require('../models/bookModel');
 const config = require('../config/config');
 const logger = require('../config/logger');
 
@@ -227,5 +227,39 @@ exports.resetPassword = async (req, res, next) => {
         next(err);
     }
 };
+// Get Profile Logic
+exports.getProfile = async (req, res, next) => {
+    try {
+        // Get user ID from the JWT token
+        const userId = req.user.id;
 
-module.exports = exports;
+        // Find user by ID and exclude password field
+        const user = await userModel.findById(userId).select('-password');
+
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+
+        // Log profile retrieval
+        logger.info('User profile retrieved', { userId: user._id });
+
+        res.status(200).json({
+            message: 'Profile retrieved successfully',
+            user
+        });
+    } catch (err) {
+        logger.error('Profile retrieval error', {
+            error: err.message,
+            stack: err.stack
+        });
+        next(err);
+    }
+};
+
+module.exports = {
+    register: exports.register,
+    login: exports.login,
+    forgetPassword: exports.forgetPassword,
+    resetPassword: exports.resetPassword,
+    getProfile: exports.getProfile
+};

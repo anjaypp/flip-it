@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-const { google } = require("../config/config");
 
 const userSchema = new mongoose.Schema({
   username: {
@@ -58,6 +57,7 @@ const userSchema = new mongoose.Schema({
       }
     }
   ],
+  
 
   // Cart
   cart: [

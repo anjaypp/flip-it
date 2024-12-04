@@ -11,21 +11,20 @@ const bookSchema = new mongoose.Schema({
     required: true
   },
   coverImage: {
-    public_id: String,
-    url: String,
-    secure_url: String,
-    format: String,
-    width: Number,
-    height: Number,
-    required: true
+    public_id: { type: String, required: true },
+    url: { type: String, required: true },
+    secure_url: { type: String },
+    format: { type: String },
+    width: { type: Number },
+    height: { type: Number }
   },
   description: {
     type: String,
     required: true
   },
-  isbn:{
-    type:String,
-    required:true
+  isbn: {
+    type: String,
+    required: true
   },
   categories: {
     type: mongoose.Schema.Types.ObjectId,
@@ -52,28 +51,33 @@ const bookSchema = new mongoose.Schema({
     type: [String],
     required: true
   },
-  avgRating: Number,
-  ratingCount: Number,
+  avgRating: {
+    type: Number,
+    default: 0
+  },
+  ratingCount: {
+    type: Number,
+    default: 0
+  },
   bookFile: {
-    public_id: String, // Cloudinary public id
-    url: String,        //Cloudinary URl
-    secure_url: String, //Cloudinary secure URL
-    format: String, // pdf, epub, etc.
-    size: Number, // File size
-    pages: Number,
-    required: true
+    public_id: { type: String, required: true },
+    url: { type: String, required: true },
+    secure_url: { type: String },
+    format: { type: String, required: true }, // pdf, epub, etc.
+    size: { type: Number },
+    pages: { type: Number }
   },
   audioBookFile: {
-    public_id: String,
-    url: String,
-    secure_url: String,
-    format: String,      // mp3, wav, etc.
-    duration: Number,    // Audio duration in seconds
-    size: Number 
+    public_id: { type: String },
+    url: { type: String },
+    secure_url: { type: String },
+    format: { type: String }, // mp3, wav, etc.
+    duration: { type: Number }, // Audio duration in seconds
+    size: { type: Number }
   },
   formats: [{
     type: String,
-    enum: ["pdf", "epub", "mobi", 'audio']
+    enum: ["pdf", "epub", "mobi", "audio"]
   }]
 });
 
