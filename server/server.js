@@ -37,6 +37,9 @@ app.use(passport.session());
 const authRoutes = require('./routes/authRoutes');  
 app.use('/api/auth', authRoutes);
 
+const adminRoutes = require('./routes/adminRoutes');
+app.use('/api/admin', adminRoutes);
+
 
 
 // Start the server
