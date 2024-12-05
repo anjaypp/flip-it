@@ -37,6 +37,9 @@ app.use(passport.session());
 const authRoutes = require('./routes/authRoutes');  
 app.use('/api/auth', authRoutes);
 
+const bookRoutes = require('./routes/bookRoutes');  
+app.use('/api/book', bookRoutes);
+
 const adminRoutes = require('./routes/adminRoutes');
 app.use('/api/admin', adminRoutes);
 
