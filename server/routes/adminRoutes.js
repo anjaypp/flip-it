@@ -1,5 +1,6 @@
 const express = require('express');
 const adminController = require('../controllers/adminController');
+const upload = require('../middlewares/uploadMiddleware');
 const router = express.Router();
 
 // User routes
@@ -8,9 +9,19 @@ router.put('/users/block/:id', adminController.blockUser); // Block a user by ID
 router.put('/users/unblock/:id', adminController.unblockUser); // Unblock a user by ID
 
 // Book routes
-router.post('/books', adminController.addBook); // Add a new book
-router.put('/books/:id', adminController.updateBook); // Update a book by ID
-router.delete('/books/:id', adminController.deleteBook); // Delete a book by ID
+router.post("/addBook", upload.fields([
+    { name: "coverImage", maxCount: 1 },
+    { name: "bookFile", maxCount: 1 },
+    { name: "audioBookFile", maxCount: 1 }
+  ]), adminController.addBook);
+
+  router.put("/updateBook/:id", upload.fields([
+    { name: "coverImage", maxCount: 1 },
+    { name: "bookFile", maxCount: 1 },
+    { name: "audioBookFile", maxCount: 1 }
+  ]), adminController.updateBook);
+
+router.delete('/deleteBook/:id', adminController.deleteBook); // Delete a book by ID
 
 // Order routes
 router.get('/orders', adminController.manageOrders); // Get all orders
