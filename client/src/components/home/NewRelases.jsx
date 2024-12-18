@@ -37,20 +37,7 @@ const NewReleases = () => {
           in the literary world. From heart-pumping thrillers to captivating memoirs, this week’s
           new releases offer something for everyone.
         </Typography>
-        <Button
-          variant="contained"
-          sx={{
-            backgroundColor: '#fbc02d',
-            color: '#000',
-            textTransform: 'none',
-            padding: '8px 16px',
-            '&:hover': {
-              backgroundColor: '#f9a825',
-            },
-          }}
-        >
-          Subscribe
-        </Button>
+        
       </Box>
 
       {/* Right Side: Rotating Angled Stacked Carousel */}
