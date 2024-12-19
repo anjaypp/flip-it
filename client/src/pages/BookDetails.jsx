@@ -26,9 +26,9 @@ const BookDetails = () => {
   const [userId] = useState(localStorage.getItem("userId"));
   const [wishlistLoading, setWishlistLoading] = useState(false);
   const [wishlistMessage, setWishlistMessage] = useState("");
-  const [preview, setPreview] = useState(null); // State to store the preview data
-  const [previewLoading, setPreviewLoading] = useState(false); // State for loading status
-  const [previewError, setPreviewError] = useState(null); // State for error status
+  const [preview, setPreview] = useState(null); 
+  const [previewLoading, setPreviewLoading] = useState(false); 
+  const [previewError, setPreviewError] = useState(null); 
 
   useEffect(() => {
     const fetchBook = async () => {
@@ -66,7 +66,6 @@ const BookDetails = () => {
     }
   };
 
-  // Function to fetch ebook preview
   const fetchEbookPreview = async () => {
     if (!book) return;
 
@@ -94,7 +93,7 @@ const BookDetails = () => {
     try {
       const response = await axios.post(
         `http://localhost:3000/api/cart/add-to-cart/${userId}`,
-        { bookId: id } // Pass the bookId in the request body
+        { bookId: id }
       );
       alert(response.data.message || "Book added to cart successfully!");
     } catch (err) {
@@ -103,7 +102,6 @@ const BookDetails = () => {
       );
     }
   };
-  
 
   const handleCheckout = async () => {
     if (!userId) {
@@ -112,29 +110,25 @@ const BookDetails = () => {
     }
   
     try {
-      // Step 1: Fetch Razorpay key from the backend
       const { data: { keyId } } = await axios.get("http://localhost:3000/api/order/get-razorpay-key");
-  
-      // Step 2: Place an order
+
       const orderResponse = await axios.post("http://localhost:3000/api/order/place-order", {
         userId,
         items: [{ bookId: id, price: book.price }],
       });
-  
+
       const { razorpayOrderId, amount } = orderResponse.data;
-  
-      // Step 3: Load Razorpay script and open payment modal
+
       const script = document.createElement("script");
       script.src = "https://checkout.razorpay.com/v1/checkout.js";
       script.onload = () => {
         const razorpay = new window.Razorpay({
-          key: keyId, // Use the fetched Razorpay key
+          key: keyId,
           amount: amount,
           currency: "INR",
           order_id: razorpayOrderId,
           handler: async (response) => {
             try {
-              // Step 4: Verify payment
               await axios.post("http://localhost:3000/api/order/verify-payment", {
                 razorpay_order_id: response.razorpay_order_id,
                 razorpay_payment_id: response.razorpay_payment_id,
@@ -146,11 +140,8 @@ const BookDetails = () => {
               alert("Payment verification failed. Please contact support.");
             }
           },
-          theme: {
-            color: "#F37254",
-          },
+          theme: { color: "#F37254" },
         });
-  
         razorpay.open();
       };
       document.body.appendChild(script);
@@ -158,7 +149,6 @@ const BookDetails = () => {
       alert("Failed to initiate checkout. Please try again later.");
     }
   };
-  
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error}</div>;
@@ -183,7 +173,7 @@ const BookDetails = () => {
                   color="info"
                   fullWidth
                   startIcon={<PreviewIcon />}
-                  onClick={fetchEbookPreview} 
+                  onClick={fetchEbookPreview}
                 >
                   {previewLoading ? "Loading..." : "Preview"}
                 </Button>
@@ -288,36 +278,14 @@ const BookDetails = () => {
               <Box sx={{ display: "flex", flexWrap: "wrap", gap: 1 }}>
                 {book.tags && book.tags.length > 0 ? (
                   book.tags.map((tag) => (
-                    <Chip key={tag} label={tag} variant="outlined" size="small" />
+                    <Chip key={tag} label={tag} color="primary" />
                   ))
                 ) : (
-                  <Chip label="No tags available" size="small" />
+                  <Chip label="No tags available" color="default" />
                 )}
               </Box>
             </Box>
           </Paper>
-
-          {/* Preview Display */}
-          {preview && (
-            <Box sx={{ mt: 4 }}>
-              <Typography variant="h6" sx={{ mb: 2 }}>
-                Ebook Preview:
-              </Typography>
-              <embed
-                src={`data:application/pdf;base64,${preview}`}
-                type="application/pdf"
-                width="100%"
-                height="600px"
-              />
-            </Box>
-          )}
-
-          {/* Error for preview */}
-          {previewError && (
-            <Typography variant="body2" color="error" sx={{ mt: 2 }}>
-              {previewError}
-            </Typography>
-          )}
         </Grid>
       </Grid>
     </Box>

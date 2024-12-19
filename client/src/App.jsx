@@ -1,5 +1,4 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { useState } from 'react';
 import { ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import theme from './styles/theme';
@@ -19,7 +18,7 @@ import ResetPassword from "./pages/ResetPassword";
 import Cart from "./pages/Cart";
 import OrderMonitoring from "./components/admin/Ordermonitor";
 import UserManagement from "./components/admin/Usermanagement";
-import AddBookPage from "./components/admin/AddBookPage";
+
 
 
 function App() {
@@ -43,7 +42,6 @@ function App() {
           <Route path="/wishlist" element={<Wishlist/>} />
 
           {/* admin */}
-           <Route path="/addBook" element={<AddBookPage />} />
            <Route path="/order-monitoring" element={<OrderMonitoring/>} />
            <Route path="/user-management" element={<UserManagement/>} />
         </Routes>
