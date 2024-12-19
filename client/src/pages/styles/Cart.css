@@ -1,0 +1,120 @@
+/* Cart.css */
+
+/* General Styles */
+.cart-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+  }
+  
+  .cart-arrow {
+    margin-bottom: 16px;
+    color: #1976d2; /* Material-UI primary color */
+  }
+  
+  .cart-title {
+    font-size: 2rem;
+    margin-bottom: 8px;
+    color: #333;
+  }
+  
+  .cart-subtitle {
+    font-size: 1rem;
+    color: #666;
+  }
+  
+  .cart-items {
+    margin-top: 16px;
+  }
+  
+  .cart-checkout {
+    background-color: #1976d2;
+    color: #fff;
+    font-size: 1rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .cart-checkout:hover {
+    background-color: #145ea8;
+  }
+  
+  /* Cart Item Styles */
+  .cart-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px;
+    margin-bottom: 16px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #fff;
+    transition: box-shadow 0.3s ease;
+  }
+  
+  .cart-item:hover {
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .cart-item-image {
+    width: 80px;
+    height: 80px;
+    border-radius: 4px;
+    margin-right: 16px;
+  }
+  
+  .cart-item-details {
+    flex: 1;
+  }
+  
+  .cart-item-name {
+    font-size: 1rem;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .cart-item-description {
+    font-size: 0.9rem;
+    color: #666;
+  }
+  
+  .cart-item-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  .cart-item-quantity {
+    font-size: 0.9rem;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .cart-item-price {
+    font-size: 0.9rem;
+    font-weight: bold;
+    color: #1976d2;
+  }
+  
+  .cart-item-delete {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    color: #d32f2f;
+    padding: 6px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .cart-item-delete:hover {
+    background-color: #f8d7da;
+  }
+  

@@ -1,0 +1,120 @@
+/* Style for the signup container */
+.signup-container {
+    width: 100%;
+    max-width: 400px;
+    margin: 5em auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    text-align: center;
+  }
+  
+  h3 {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+  
+  p {
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 20px;
+  }
+  
+  .google-login-btn {
+    background-color: #4285f4;
+    color: white;
+    border: none;
+    padding: 10px;
+    width: 100%;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .google-login-btn:hover {
+    background-color: #357ae8;
+  }
+  
+  .divider {
+    margin: 20px 0;
+    position: relative;
+  }
+  
+  .divider span {
+    background-color: #fff;
+    padding: 0 10px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #888;
+  }
+  
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  label {
+    text-align: left;
+    font-size: 14px;
+    color: #333;
+  }
+  
+  input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    width: 100%;
+  }
+  
+  input:focus {
+    border-color: #4285f4;
+    outline: none;
+  }
+  
+  .signup-btn {
+    background-color: #4285f4;
+    color: white;
+    border: none;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .signup-btn:hover {
+    background-color: #357ae8;
+  }
+  
+  .terms {
+    font-size: 14px;
+    margin-top: 20px;
+  }
+  
+  .terms a {
+    color: #4285f4;
+  }
+  
+  .terms a:hover {
+    text-decoration: underline;
+  }
+  
+  .login-link {
+    font-size: 14px;
+    margin-top: 20px;
+  }
+  
+  .login-link a {
+    color: #4285f4;
+  }
+  
+  .login-link a:hover {
+    text-decoration: underline;
+  }
+  
