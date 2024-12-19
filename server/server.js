@@ -53,8 +53,6 @@ const orderRoutes = require('./routes/orderRoutes');
 app.use('/api/order', orderRoutes);
 
 
-
-
 // Start the server
 const PORT = config.port;
 
