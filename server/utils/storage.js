@@ -17,11 +17,11 @@ const storage = new CloudinaryStorage({
              folder = 'audio';
              resourceType = 'raw';
         }
-        else if (file.mimetype.startsWith('application/pdf') || file.mimetype.startsWith('application/epub+zip') || file.mimetype.startsWith('application/mobi')) {
-          folder = 'documents';
-          resourceType = 'raw';
-      }
-      
+        else if(file.mimetype.startsWith('application/pdf' || 'application/epub+zip' || 'application/mobi')) {
+            folder = 'documents';
+            resourceType = 'raw';
+        }
+
         return {
             folder: folder,
             resource_type: resourceType,

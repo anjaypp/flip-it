@@ -11,33 +11,3 @@ logo{
     background-color: 'white' !important;
     border-radius: '50%' !important;            
 }
-/* Navbar.module.css */
-.searchContainer {
-    position: relative;
-    border-radius: var(--mui-shape-borderRadius); /* Use theme value or fallback */
-    background-color: rgba(255, 255, 255, 0.15);
-    transition: background-color 0.3s ease;
-    margin-left: 16px;
-    width: 100%;
-    max-width: 400px;
-    display: flex;
-    align-items: center;
-  }
-  
-  .searchContainer:hover {
-    background-color: rgba(255, 255, 255, 0.25);
-  }
-  
-  .searchIconWrapper {
-    padding: 0 16px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  .searchInput {
-    color: inherit;
-    padding: 8px 8px 8px calc(1em + 32px); /* Adjust padding-left for icon */
-    width: 100%;
-  }
-  

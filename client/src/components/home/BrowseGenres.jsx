@@ -1,21 +1,21 @@
 import React from 'react';
 import { Box, Card, CardMedia, Typography, Grid } from '@mui/material';
 import banner2 from '../../assets/banner2.png';
-import { Link } from 'react-router-dom';
 
 
 const genres = [
-  { title: 'Fiction'},
-  { title: 'Non-Fiction'},
-  { title: 'Thrillers'},
-  { title: 'Children'}, 
+  { title: 'Fiction', image: 'https://via.placeholder.com/150' },
+  { title: 'Non-Fiction', image: 'https://via.placeholder.com/150' },
+  { title: 'Thrillers', image: 'https://via.placeholder.com/150' },
+  { title: 'Children', image: 'https://via.placeholder.com/150' },
+  
 ];
 
 export default function BrowseGenres() {
   return (
     <Box sx={{ m : 3}}>
       <Typography variant="h6" sx={{ mb: 2 }}>
-        Browse Genres <Typography component="span" variant="subtitle2" sx={{ color: 'primary.main', cursor: 'pointer' }}><Link to="/genres">(view all)</Link></Typography>
+        Browse Genres <Typography component="span" variant="subtitle2" sx={{ color: 'primary.main', cursor: 'pointer' }}>(view all)</Typography>
       </Typography>
 
       <Grid container spacing={2}>

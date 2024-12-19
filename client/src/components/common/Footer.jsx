@@ -28,7 +28,7 @@ export default function Footer() {
               Flip It
             </Typography>
             <Typography variant="body2">
-            Discover endless stories and insights on our eBook platform, designed to bring your reading journey to life with just a click!
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lacinia odio vitae vestibulum.
             </Typography>
           </Grid>
 

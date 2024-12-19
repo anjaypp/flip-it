@@ -49,10 +49,6 @@ app.use('/api/cart', cartRoutes);
 const wishlistRoutes = require('./routes/wishlistRoutes');
 app.use('/api/wishlist', wishlistRoutes);
 
-const orderRoutes = require('./routes/orderRoutes');
-app.use('/api/order', orderRoutes);
-
-
 
 
 // Start the server

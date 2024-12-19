@@ -61,7 +61,7 @@ exports.getWishlist = async (req, res) => {
         res.status(200).json({ wishlist: user.wishlist });
     }
     catch(err){
-        logger.error('Error retriving wishlist', {error: error.message});
+        logger.error('Error retriving wishlist', {error: err.message});
         res.status(500).json({ message: 'Error retriving wishlist' });
     }
      };
